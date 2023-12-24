@@ -11,6 +11,8 @@ import torch
 def train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
     model.train()
+    running_loss = []
+    
     for batch, (X,y) in enumerate(dataloader):
         #compute prediction and loss
         preds = model(X)
@@ -21,10 +23,32 @@ def train(dataloader, model, loss_fn, optimizer):
         optimizer.step()
         optimizer.zero_grad()
         
+        
         if batch%100 == 0:
             loss, current = loss.item(), batch+1 * len(X)
+            running_loss.append(loss)
             print(f"Loss: {loss:>7f}   [{current:>5d}|{size:>5d}]")
             
+        
+    return running_loss
+            
+            
+            #losses.append(loss)
+            
+    
+    #Save weight and biases values
+    #for name, params in model.named_parameters():
+    #    names.append(name)
+    #    if "weight" in name:
+    #        weights.append(params.clone().detach())
+    #    elif "bias" in name:
+    #        biases.append(params.clone().detach()) 
+        
+        
+            
+    # Return the model parameters (weights and biases)
+    #return names, weights, biases, losses
+                 
 
             
 

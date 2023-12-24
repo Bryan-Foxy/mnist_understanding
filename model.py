@@ -12,7 +12,7 @@ torch.manual_seed(123)
 
 class NeuralNetwork(nn.Module):
     def __init__(self, input_f, h, output_f):
-        super().__init__()
+        super(NeuralNetwork,self).__init__()
         self.input_f = input_f
         self.h = h
         self.output_f = output_f
