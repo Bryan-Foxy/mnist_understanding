@@ -10,13 +10,11 @@ import torchvision
 from torchvision import datasets
 from torchvision.transforms import ToTensor
 from torch.utils.data import DataLoader
-from torch.utils.tensorboard import SummaryWriter
-from model import NeuralNetwork
+from model import NeuralNetwork, CNN
 from train import train, test
 import matplotlib.pyplot as plt
 
 print('version of pytorch {}'.format(torch.__version__))
-writer = SummaryWriter()#load tensorboard
 
 training_data = datasets.MNIST(root='data',
                                train = True,
@@ -100,10 +98,6 @@ plt.title(label)
 plt.imshow(img, cmap='gray')
 plt.show()
 
-#load it in tensorboard
-img_grid = torchvision.utils.make_grid(train_feature)
-writer.add_image("mnist_img", img_grid)
-writer.close()
 
 
 #Select the device
@@ -134,28 +128,39 @@ epochs = 5
 print("The model is starting: with Adam\n")
 for t in range(epochs):
     print(f"Epoch {t+1}: -------------------------------")
-    trained_ = train(train_loader, model, loss_fn, optimizer)
+    loss = train(train_loader, model, loss_fn, optimizer)
     test(test_loader, model, loss_fn)
+
 
 print('Done')
 
 fig , ax = plt.subplots()
 ax.set_xlabel("Over Epochs")
 ax.set_ylabel(f"Loss [Adam]")
-ax.plot(trained_)
+ax.plot(loss)
 
 print("The model is starting: with SGD\n")
 opt_sgd = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9)
 for t in range(epochs):
     print(f"Epoch {t+1}: -------------------------------")
-    trained_ = train(train_loader, model, loss_fn, opt_sgd)
+    loss = train(train_loader, model, loss_fn, opt_sgd)
     test(test_loader, model, loss_fn)
 
 print('Done')
 fig , ax = plt.subplots()
 ax.set_xlabel("Over Epochs")
 ax.set_ylabel(f"Loss [SGD]")
-ax.plot(trained_)
+ax.plot(loss)
+
+#####CNN########################################
+cnn = CNN(input_f, h, output_f).to(device)
+print(cnn)
+print("The CNN model start...")
+for t in range(epochs):
+    print(f"Epoch {t+1}: -------------------------------")
+    loss = train(train_loader, model, loss_fn, optimizer)
+    test(test_loader, model, loss_fn)
+
 
 
 ###################################################

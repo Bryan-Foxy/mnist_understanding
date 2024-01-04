@@ -3,15 +3,17 @@
 Created on Tue Dec 12 10:13:53 2023
 
 @author: xphones
+
 """
 
 import torch
- 
+
 
 def train(dataloader, model, loss_fn, optimizer):
-    size = len(dataloader.dataset)
+    size = len(dataloader)
     model.train()
-    running_loss = []
+    loss_l = []
+
     
     for batch, (X,y) in enumerate(dataloader):
         #compute prediction and loss
@@ -25,12 +27,12 @@ def train(dataloader, model, loss_fn, optimizer):
         
         
         if batch%100 == 0:
-            loss, current = loss.item(), batch+1 * len(X)
-            running_loss.append(loss)
-            print(f"Loss: {loss:>7f}   [{current:>5d}|{size:>5d}]")
-            
+            loss= loss.item()
+            print(f"Loss: {loss:>7f}   [{batch +1:>5d}|{size:>5d}]")
+            loss_l.append(loss)
         
-    return running_loss
+    return loss_l 
+            
             
             
             #losses.append(loss)
@@ -57,6 +59,8 @@ def test(dataloader, model, loss_fn):
     size = len(dataloader.dataset)
     num_batches = len(dataloader)
     test_loss, correct = 0,0
+    loss = []
+    acc = []
     
     
     with torch.no_grad():
