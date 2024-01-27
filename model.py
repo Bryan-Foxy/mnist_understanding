@@ -42,14 +42,14 @@ class CNN(nn.Module):
         super(CNN, self).__init__()
 
         self.convolution = nn.Sequential(
-            nn.Conv2d(3, 6, 5),
+            nn.Conv2d(1, 6, 5),
             nn.MaxPool2d(2,2),
             nn.Conv2d(6,8,5),
             nn.Conv2d(8,12,5)
         )
 
         self.dnn = nn.Sequential(
-            nn.Linear(12*input_h*input_h, h),
+            nn.Linear(12*4*4, h),
             nn.ReLU(),
             nn.Linear(h,h),
             nn.ReLU(),
@@ -58,7 +58,11 @@ class CNN(nn.Module):
 
     def forward(self, x):
         x = self.convolution(x)
+        x = torch.flatten(x,1)
         x = self.dnn(x)
+        
+        return x
+        
 
 
     
