@@ -1,4 +1,6 @@
 # MNIST_Understanding
+![mnist](https://github.com/Bryan-Foxy/mnist_understanding/assets/67081376/776928d8-e4d8-4682-9e6d-e82f529d414d)
+
 Here, we will work with the MNIST dataset. This project I have undertaken aims to create a Deep Neural Network (DNN) after Convolution Neural Network(CNN) model initially, evaluate it, and understand comprehensively the various parameters from a mathematical perspective.
 
 We have use python and the framework pytorch 2 for this project
