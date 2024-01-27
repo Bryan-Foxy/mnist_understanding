@@ -131,6 +131,24 @@ opt_1s = torch.optim.SGD(dnn.parameters(), lr = lr)
 opt_1 = [opt_1a,opt_1s]
 epochs = 5
 
+# Function to reset model parameters
+def reset_model_params(model):
+    """
+
+    Parameters
+    ----------
+    model : Pytorch model
+        We initialize weight because we want to compare´.
+
+    Returns
+    -------
+    None.
+
+    """
+    for layer in model.children():
+        if hasattr(layer, 'reset_parameters'):
+            layer.reset_parameters()
+
 
 #####DNN########################################
 print("The model is starting: with Adam\n")
@@ -143,6 +161,7 @@ for opt in opt_1:
         print("With Adam: \n")
         loss_1a, valid_1a = trainer(train_loader, test_loader, dnn, loss_fn, opt, epochs=epochs)
     else:
+        reset_model_params(dnn)#initialize weights
         print("With SGD: \n")
         loss_1s, valid_1s = trainer(train_loader, test_loader, dnn, loss_fn, opt, epochs=epochs)
         
@@ -160,8 +179,14 @@ for opt in opt_2:
         print("With Adam: \n")
         loss_2a, valid_2a = trainer(train_loader, test_loader, cnn, loss_fn, opt, epochs=epochs)
     else:
+        reset_model_params(cnn)#initialize weights
         print("With SGD: \n")
         loss_2s, valid_2s = trainer(train_loader, test_loader, cnn, loss_fn, opt, epochs=epochs)
-        
+
+print("Accuracy = {} and loss test = {} for DNN with Adam".format(valid_1a[-1]['accuracy'][-1], valid_1a[-1]['test_loss'][-1]))
+print("Accuracy = {} and loss test = {} for DNN with SGD".format(valid_1s[-1]['accuracy'][-1], valid_1s[-1]['test_loss'][-1]))
+print("Accuracy = {} and loss test = {} for CNN with Adam".format(valid_2a[-1]['accuracy'][-1], valid_2a[-1]['test_loss'][-1]))
+print("Accuracy = {} and loss test = {} for CNN with SGD".format(valid_2s[-1]['accuracy'][-1], valid_2s[-1]['test_loss'][-1]))
+
 ###Evaluation####################################
 evaluation(loss_1a, valid_1a, loss_1s, valid_1s, loss_2a, valid_2a, loss_2s, valid_2s, N=epochs)

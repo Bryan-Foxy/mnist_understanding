@@ -23,6 +23,8 @@ def trainer(dataloader, validloader, model, criterion, optimizer, epochs=5):
     model.train()
     loss_cache = []
     valid_cache = []
+    acc = []
+    loss_test = []
     
     #run tensorboard
     writer = SummaryWriter()
@@ -60,7 +62,9 @@ def trainer(dataloader, validloader, model, criterion, optimizer, epochs=5):
 
         avg_test_loss = total_test_loss / len(validloader)
         accuracy = total_correct / len(validloader.dataset)
-        valid_cache.append({"test_loss": avg_test_loss, "accuracy": accuracy})
+        acc.append(accuracy)
+        loss_test.append(avg_test_loss)
+        valid_cache.append({"test_loss": loss_test, "accuracy": acc})
         
         #add plot in the tensorboard
         writer.add_scalar("Loss", loss, global_step=step)

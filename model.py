@@ -62,7 +62,6 @@ class CNN(nn.Module):
         x = self.dnn(x)
         
         return x
-        
 
 
     
