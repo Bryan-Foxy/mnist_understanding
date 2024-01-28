@@ -8,6 +8,8 @@ In our case it is a matrix (2-dimensional tensor) because it is black on white.
 
 The work here consists of better understanding the Dense Neural Network (Or Multi Layer Perceptron (MLP), these are synonyms, a DNN and composed of several perceptrons connected together) and CNN architectures as well as the behavior of Adaptive Moment Estimation ( Adam) and Stochastic Gradient Descent(SGD)
 
+We will train our models for just **5 epochs**.
+
 
 ## Architecture of the model use:
 For the DNN architecture, we have:
