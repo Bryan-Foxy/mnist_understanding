@@ -30,7 +30,7 @@ Adam is an extension of SGD that adapts the learning rates for each parameter ba
 In this section, we will evaluate the performance of Convolutional Neural Networks (CNNs) and explore two visualization techniques: GradCAM and Saliency.
 
 1. **CNN Performance Evaluation:**
-   We will assess the effectiveness of Convolutional Neural Networks in solving our task. This involves training a CNN model on CIFAR-10, and evaluating its accuracy on a separate test dataset. We can use metrics like accuracy, precision, recall, and F1-score to measure the model's classification performance.
+   We will assess the effectiveness of Convolutional Neural Networks in solving our task. This involves training a CNN model on MNIST, and evaluating its accuracy on a separate test dataset.
 
 2. **GradCAM (Gradient-weighted Class Activation Mapping):**
    GradCAM is a technique that helps visualize which parts of an image are important for the CNN's predictions. By leveraging the gradients of the target class with respect to the final convolutional layer, GradCAM highlights regions in the input image that contribute most to the prediction. We will implement GradCAM to gain insights into the CNN's decision-making process.
