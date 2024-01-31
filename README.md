@@ -12,8 +12,10 @@ You need Anaconda to run the job and have the basic libraries
 If you want to download the project
 Download the master branch and first you must install:
 
+```
 - pip install pytorch 
 - pip install tensorboard
+```
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 # DNN Model
