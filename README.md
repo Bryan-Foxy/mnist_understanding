@@ -13,8 +13,8 @@ If you want to download the project
 Download the master branch and first you must install:
 
 ```
-- pip install pytorch 
-- pip install tensorboard
+pip install pytorch 
+pip install tensorboard
 ```
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
