@@ -188,5 +188,9 @@ print("Accuracy = {} and loss test = {} for DNN with SGD".format(valid_1s[-1]['a
 print("Accuracy = {} and loss test = {} for CNN with Adam".format(valid_2a[-1]['accuracy'][-1], valid_2a[-1]['test_loss'][-1]))
 print("Accuracy = {} and loss test = {} for CNN with SGD".format(valid_2s[-1]['accuracy'][-1], valid_2s[-1]['test_loss'][-1]))
 
+#save thre model
+path = 'model/mnist_cnn.pth'
+torch.save(cnn.state_dict(), path)
+print('CNN MODEL SAVED ...')
 ###Evaluation####################################
 evaluation(loss_1a, valid_1a, loss_1s, valid_1s, loss_2a, valid_2a, loss_2s, valid_2s, N=epochs)
